@@ -1,0 +1,158 @@
+<?php
+declare(strict_types=1);
+
+namespace FAQ;
+
+/**
+ * FAQService — loads and provides access to FAQ data from knowledge/faq.json.
+ */
+final class FAQService
+{
+    /** @var array<int, array{question: string, answer: string, category: string}> */
+    private array $faqs = [];
+
+    /** @var string */
+    private string $dataPath;
+
+    public function __construct(?string $dataPath = null)
+    {
+        $this->dataPath = $dataPath ?? __DIR__ . '/../../knowledge/faq.json';
+        $this->load();
+    }
+
+    /**
+     * Load FAQ data from JSON file.
+     */
+    private function load(): void
+    {
+        if (!is_file($this->dataPath)) {
+            throw new \RuntimeException("FAQ data file not found: {$this->dataPath}");
+        }
+
+        $json = file_get_contents($this->dataPath);
+        if ($json === false) {
+            throw new \RuntimeException("Failed to read FAQ data file: {$this->dataPath}");
+        }
+
+        $data = json_decode($json, true);
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            throw new \RuntimeException('Invalid JSON in FAQ data: ' . json_last_error_msg());
+        }
+
+        if (!isset($data['faqs']) || !is_array($data['faqs'])) {
+            throw new \RuntimeException('FAQ data missing "faqs" array');
+        }
+
+        $this->faqs = $data['faqs'];
+    }
+
+    /**
+     * Get all FAQs.
+     *
+     * @return array<int, array{question: string, answer: string, category: string}>
+     */
+    public function getAll(): array
+    {
+        return $this->faqs;
+    }
+
+    /**
+     * Get FAQs by category.
+     *
+     * @return array<int, array{question: string, answer: string, category: string}>
+     */
+    public function getByCategory(string $category): array
+    {
+        return array_filter($this->faqs, fn($faq) => $faq['category'] === $category);
+    }
+
+    /**
+     * Get unique categories.
+     *
+     * @return array<int, string>
+     */
+    public function getCategories(): array
+    {
+        return array_values(array_unique(array_column($this->faqs, 'category')));
+    }
+
+    /**
+     * Search FAQs by keyword in question or answer with fuzzy matching fallback.
+     *
+     * @return array<int, array{question: string, answer: string, category: string}>
+     */
+    public function search(string $keyword): array
+    {
+        $keyword = mb_strtolower($keyword);
+        
+        // First pass: exact substring match
+        $exactMatches = array_filter($this->faqs, function ($faq) use ($keyword) {
+            return mb_strpos(mb_strtolower($faq['question']), $keyword) !== false
+                || mb_strpos(mb_strtolower($faq['answer']), $keyword) !== false;
+        });
+        
+        // If we have good exact matches, return them
+        if (count($exactMatches) >= 3) {
+            return array_values($exactMatches);
+        }
+        
+        // Second pass: fuzzy matching using similar_text() on questions
+        $scored = [];
+        foreach ($this->faqs as $faq) {
+            $questionLower = mb_strtolower($faq['question']);
+            $answerLower = mb_strtolower($faq['answer']);
+            
+            // Score based on question similarity (primary) + answer similarity (secondary)
+            similar_text($keyword, $questionLower, $questionScore);
+            similar_text($keyword, $answerLower, $answerScore);
+            
+            // Weighted score: question similarity matters more
+            $score = ($questionScore * 0.7) + ($answerScore * 0.3);
+            
+            // Also boost if any keyword tokens appear in question
+            $keywordTokens = preg_split('/\s+/', $keyword, -1, PREG_SPLIT_NO_EMPTY);
+            $tokenBoost = 0;
+            foreach ($keywordTokens as $token) {
+                if (mb_strlen($token) > 2 && mb_strpos($questionLower, $token) !== false) {
+                    $tokenBoost += 10;
+                }
+            }
+            
+            $finalScore = $score + $tokenBoost;
+            
+            if ($finalScore > 25) { // threshold to filter noise
+                $scored[] = ['faq' => $faq, 'score' => $finalScore];
+            }
+        }
+        
+        // Sort by score descending
+        usort($scored, fn($a, $b) => $b['score'] <=> $a['score']);
+        
+        // Return top matches (max 5)
+        return array_values(array_map(fn($item) => $item['faq'], array_slice($scored, 0, 5)));
+    }
+
+    /**
+     * Get random FAQ (useful for suggestions).
+     */
+    public function getRandom(): ?array
+    {
+        return $this->faqs !== [] ? $this->faqs[array_rand($this->faqs)] : null;
+    }
+
+    /**
+     * Get count of FAQs.
+     */
+    public function count(): int
+    {
+        return count($this->faqs);
+    }
+
+    /**
+     * Reload data from file (useful if file was updated).
+     */
+    public function reload(): void
+    {
+        $this->load();
+    }
+}

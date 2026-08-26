@@ -1,0 +1,104 @@
+{
+    "faqs": [
+        {
+            "question": "What are your office hours?",
+            "answer": "Our offices are open Monday through Friday, 08:00 to 15:00 WIB. Closed on national holidays.",
+            "category": "general"
+        },
+        {
+            "question": "Where is your office located?",
+            "answer": "kantor kami berada di Jl. Bhayangkara No.224/84, Selabatu, Kec. Cikole, Kota Sukabumi, Jawa Barat 43114",
+            "category": "general"
+        },
+        {
+            "question": "How do I contact customer service?",
+            "answer": "Call center: 1500-XXX (local rate). Email: layanan@kemenXX.go.id. Live chat: website resmi jam kerja.",
+            "category": "contact"
+        },
+        {
+            "question": "What documents are needed for KTP registration?",
+            "answer": "KK asli + fotokopi, Akta Kelahiran/Surat Nikah, KTP lama (jika perpanjangan), pas foto 3x4 berwarna 2 lembar, formulir pendaftaran.",
+            "category": "ktp"
+        },
+        {
+            "question": "How long does KTP processing take?",
+            "answer": "KTP elektronik (e-KTP): 7-14 hari kerja setelah verifikasi data lengkap. KTP biasa: 3-5 hari kerja.",
+            "category": "ktp"
+        },
+        {
+            "question": "Can I apply for KTP online?",
+            "answer": "Ya, melalui aplikasi Dukcapil Online atau website dukcapil.kemendagri.go.id. Datang ke kantor tetap diperlukan untuk verifikasi biometrik.",
+            "category": "ktp"
+        },
+        {
+            "question": "What are the requirements for marriage registration?",
+            "answer": "KTP kedua calon pengantin, KK, Akta Kelahiran, Surat Keterangan Belum Menikah, foto 4x6 bersama 2 lembar, surat izin orang tua (jika <21 th).",
+            "category": "marriage"
+        },
+        {
+            "question": "How do I register a birth certificate?",
+            "answer": "Datang ke Dinas Kependudukan dengan: surat kelahiran dari rumah sakit/bidan, KTP orang tua, KK, Akta Nikah orang tua. Gratis untuk usia <60 hari.",
+            "category": "birth"
+        },
+        {
+            "question": "What is the fee for death certificate?",
+            "answer": "Gratis jika dilaporkan dalam 30 hari. Denda Rp 50.000 per bulan keterlambatan (maks. Rp 500.000).",
+            "category": "death"
+        },
+        {
+            "question": "How do I change address on KTP?",
+            "answer": "Bawa KTP lama, KK baru, surat pindah dari RT/RW, bukti kepemilikan/sewa rumah. Proses 5-7 hari kerja.",
+            "category": "ktp"
+        },
+        {
+            "question": "What services are available at Dispendukcapil?",
+            "answer": "Pembuatan KTP, KK, Akta Kelahiran, Akta Nikah, Akta Kematian, Akta Perceraian, pengubahan data kependudukan, cetak ulang dokumen.",
+            "category": "services"
+        },
+        {
+            "question": "How do I check my application status?",
+            "answer": "Cek via aplikasi Dukcapil Online, SMS ke 1500-XXX dengan format STATUS#NIK, atau datang ke loket pendaftaran.",
+            "category": "services"
+        },
+        {
+            "question": "What if my KTP is lost or damaged?",
+            "answer": "Lapor ke polisi (surat keterangan hilang), lalu ajukan cetak ulang ke Dispendukcapil dengan KK, KTP keluarga, pas foto 2 lembar. Biaya Rp 50.000.",
+            "category": "ktp"
+        },
+        {
+            "question": "Can foreigners get Indonesian KTP?",
+            "answer": "WNA dengan KITAS/KITAP bisa mendapat KTP elektronik berlaku sesuai masa tinggal. Syarat: paspor, KITAS/KITAP, SKTT, foto, formulir.",
+            "category": "ktp"
+        },
+        {
+            "question": "How to report population data errors?",
+            "answer": "Datang ke kantor dengan dokumen bukti (akta, KK, KTP). Pengajuan koreksi data: nama, NIK, jenis kelamin, agama, tanggal lahir, alamat.",
+            "category": "services"
+        },
+        {
+            "question": "What is NIK and where to find it?",
+            "answer": "Nomor Induk Kependudukan (16 digit) tertera di KTP, KK, dan akta kependudukan. Format: PP.KK.DD.TT.UU.NNNN (prov-kab-tgl-lahir-urut).",
+            "category": "general"
+        },
+        {
+            "question": "How to get family card (KK) for new household?",
+            "answer": "Kepala keluarga datang dengan: KTP suami istri, Akta Nikah, KK asal (jika pindah), surat pengantar RT/RW, pas foto kepala keluarga 2 lembar.",
+            "category": "kk"
+        },
+        {
+            "question": "What is the procedure for divorce certificate?",
+            "answer": "Putusan pengadilan yang berkekuatan hukum tetap + salinan, KTP kedua pihak, KK, Akta Nikah. Daftar di Dinas Kependudukan tempat akta nikah dibuat.",
+            "category": "marriage"
+        },
+        {
+            "question": "Are there mobile services for remote areas?",
+            "answer": "Ya, layanan KELILING (Kependudukan Layanan Keliling) mengunjungi desa/kelurahan terpencil. Jadwal diumumkan via website dan sosial media setempat.",
+            "category": "services"
+        },
+        {
+            "question": "How to complain about service quality?",
+            "answer": "Lapor via: telepon 1500-XXX, email pengaduan@kemenXX.go.id, aplikasi Lapor!, atau langsung ke unit pengaduan internal kantor. Ditindaklanjuti 3-5 hari kerja.",
+            "category": "complaint"
+        }
+    ]
+}
