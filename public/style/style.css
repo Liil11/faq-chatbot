@@ -436,7 +436,7 @@ body {
     position: fixed;
     bottom: calc(20px + var(--safe-bottom));
     right: calc(20px + var(--safe-right));
-    left: calc(20px + var(--safe-left));
+    left: calc(1000px + var(--safe-left));
     max-width: 300px;
     margin: 0 auto;
     background: var(--bg-chat);
