@@ -18,7 +18,7 @@
     
 
     // Demo mode flag - set to false to use real API
-    const DEMO_MODE = true
+    const DEMO_MODE = false
 
     // Fake responses for demo mode
     const FAKE_RESPONSES = [
